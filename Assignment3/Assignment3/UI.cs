@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment3.G;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,6 +40,17 @@ namespace Assignment3
             SmallMenuBar();
             ConsoleKey input = Console.ReadKey(true).Key;
             return input;
+        }
+
+        public static void PrintMembers(string header, List<Member> members)
+        {
+            SmallMenuBar();
+            Console.WriteLine($"\t{header}");
+            SmallMenuBar();
+            foreach (var member in members)
+            {
+                Console.WriteLine($"{member.FirstName} {member.LastName} {member.SocialSecurityNr} {member.membershipFeePaid}");
+            }
         }
 
         private static void SmallMenuBar()

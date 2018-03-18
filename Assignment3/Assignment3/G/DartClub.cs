@@ -35,5 +35,25 @@ namespace Assignment3.G
                 new Member { FirstName = "", LastName = "", SocialSecurityNr = 195406228550, membershipFeePaid = true }
             };
         }
+
+        public void SortByEldest()
+        {
+        }
+
+        public void SortByLastName()
+        {
+
+        }
+
+        public void membershipNotPaid()
+        {
+
+        }
+
+        public void searchMember()
+        {
+
+        }
+
     }
 }
