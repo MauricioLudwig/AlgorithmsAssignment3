@@ -42,6 +42,23 @@ namespace Assignment3
             return input;
         }
 
+        public static ConsoleKey TimerMenu()
+        {
+            Console.Clear();
+            SmallMenuBar();
+            Console.WriteLine("\t    Timer:");
+            SmallMenuBar();
+            Console.WriteLine("\t1 - Generate 10 000 integers");
+            Console.WriteLine("\t2 - Generate 20 000 integers");
+            Console.WriteLine("\t3 - Generate 40 000 integers");
+            Console.WriteLine("\t4 - Return to main menu");
+            SmallMenuBar();
+            Console.WriteLine("\t     Choice?");
+            SmallMenuBar();
+            ConsoleKey input = Console.ReadKey(true).Key;
+            return input;
+        }
+
         public static void PrintMembers(string header, List<Member> members)
         {
             int index = 1;
@@ -63,6 +80,13 @@ namespace Assignment3
                         index++, member.FirstName, member.LastName, member.SocialSecurityNr, member.membershipFeePaid == true ? "YES" : "NO");
                 }
             }
+        }
+
+        public static void PrintTimer(string header, TimeSpan time)
+        {
+            SmallMenuBar();
+            Console.WriteLine($"Action: {header}\nTime elapsed: {time} or {time.TotalSeconds} seconds");
+            SmallMenuBar();
         }
 
         private static void SmallMenuBar()
