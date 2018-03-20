@@ -50,10 +50,18 @@ namespace Assignment3
             SmallMenuBar();
             Console.WriteLine("\n{0,-5}{1,-20} {2,-20} {3,-20} {4,-20}\n",
                 "#", "First Name", "Last Name", "Social Security", "Membership paid?");
-            foreach (var member in members)
+
+            if (members.Count < 1)
             {
-                Console.WriteLine("{0, -5}{1,-20} {2,-20} {3,-20} {4,-20}",
-                    index++, member.FirstName, member.LastName, member.SocialSecurityNr, member.membershipFeePaid == true ? "YES" : "NO");
+                Console.WriteLine("No entries found.");
+            }
+            else
+            {
+                foreach (var member in members)
+                {
+                    Console.WriteLine("{0, -5}{1,-20} {2,-20} {3,-20} {4,-20}",
+                        index++, member.FirstName, member.LastName, member.SocialSecurityNr, member.membershipFeePaid == true ? "YES" : "NO");
+                }
             }
         }
 

@@ -22,36 +22,26 @@ namespace Assignment3.Algorithms
 
         private static int Partition<T, TProperty>(T[] unsortedList, int left, int right, Func<T, TProperty> selector)
         {
-            T pivot = unsortedList[left];
+            T pivot = unsortedList[right];
 
-            while (true)
+            int i = left;
+            T tempValue; 
+
+            for (int j = left; j < right; j++)
             {
-                while (Comparer<TProperty>.Default.Compare(selector(unsortedList[left]), selector(pivot)) < 0)
+                if (Comparer<TProperty>.Default.Compare(selector(unsortedList[j]), selector(pivot)) <= 0)
                 {
-                    left++;
-                }
-
-                while (Comparer<TProperty>.Default.Compare(selector(unsortedList[right]), selector(pivot)) > 0)
-                {
-                    right--;
-                }
-
-                if (left < right)
-                {
-                    if (Comparer<TProperty>.Default.Compare(selector(unsortedList[left]), selector(unsortedList[right])) == 0)
-                    {
-                        return right;
-                    }
-
-                    T temp = unsortedList[left];
-                    unsortedList[left] = unsortedList[right];
-                    unsortedList[right] = temp;
-                }
-                else
-                {
-                    return right;
+                    tempValue = unsortedList[j];
+                    unsortedList[j] = unsortedList[i];
+                    unsortedList[i] = tempValue;
+                    i++;
                 }
             }
+
+            unsortedList[right] = unsortedList[i];
+            unsortedList[i] = pivot;
+
+            return i;
         }
     }
 }

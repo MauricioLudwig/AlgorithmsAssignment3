@@ -52,7 +52,7 @@ namespace Assignment3
                         Console.ReadKey();
                         break;
                     case ConsoleKey.D3: // List all members who have not paid their membership fees
-                        dartClub.membershipNotPaid();
+                        dartClub.membershipNotPaid_FOREACH();
                         Console.ReadKey();
                         break;
                     case ConsoleKey.D4: // Search by last name or social security number

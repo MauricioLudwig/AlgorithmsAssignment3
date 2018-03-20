@@ -34,7 +34,7 @@ namespace Assignment3.G
                 new Member { FirstName = "Cormac", LastName = "McCarthy", SocialSecurityNr = 198110143032, membershipFeePaid = true },
                 new Member { FirstName = "Maxim", LastName = "Gorky", SocialSecurityNr = 195508027579, membershipFeePaid = false },
                 new Member { FirstName = "Phillip", LastName = "Lovecraft", SocialSecurityNr = 195905205851, membershipFeePaid = false },
-                new Member { FirstName = "Adam", LastName = "Camus", SocialSecurityNr = 195406228550, membershipFeePaid = true }
+                new Member { FirstName = "Adam", LastName = "Kafka", SocialSecurityNr = 195406228550, membershipFeePaid = true }
             };
         }
 
@@ -54,17 +54,68 @@ namespace Assignment3.G
             UI.PrintMembers("Sorted (Last Name)", sortedList.ToList());
         }
 
-        public void membershipNotPaid()
+        public void membershipNotPaid_LINQ()
         {
             Console.Clear();
             UI.PrintMembers("Unsorted", Members);
             UI.PrintMembers("Sorted (Members who have not paid their membership fee)", Members.Where(o => !o.membershipFeePaid).Select(o => o).ToList());
         }
 
-        public void searchMember()
+        public void membershipNotPaid_FOREACH()
         {
             Console.Clear();
-            UI.PrintMembers("Search for members", Members);
+            UI.PrintMembers("Unsorted", Members);
+            var feeNotPaid = new List<Member>();
+            foreach (var member in Members)
+            {
+                if (!member.membershipFeePaid)
+                    feeNotPaid.Add(member);
+            }
+            UI.PrintMembers("Sorted (Members who have not paid their membership fee (USING FOREACH))", feeNotPaid);
+        }
+
+        public void searchMember()
+        {
+
+            string input;
+
+            do
+            {
+
+                Console.Write("Input: ");
+                input = Console.ReadLine().Trim();
+
+            } while (String.IsNullOrEmpty(input));
+
+            bool longInput = long.TryParse(input, out long result);
+
+            if (longInput)
+            {
+                var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.SocialSecurityNr);
+                var searchResult = LinearSearch(sortedList, o => o.SocialSecurityNr, result);
+                UI.PrintMembers("Search Result (Social Security Number)", searchResult);
+            }
+            else
+            {
+                var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.LastName);
+                var searchResult = LinearSearch(sortedList, o => o.LastName.ToLower(), input.ToLower());
+                UI.PrintMembers("Search Result (Last Name)", searchResult);
+            }
+        }
+
+        private List<T> LinearSearch<T, TProperty>(T[] members, Func<T, TProperty> selector, TProperty searchTerm)
+        {
+            var searchResult = new List<T>();
+
+            foreach (var member in members)
+            {
+                if (Comparer<TProperty>.Default.Compare(selector(member), searchTerm) == 0)
+                {
+                    searchResult.Add(member);
+                }
+            }
+
+            return searchResult;
         }
 
     }
