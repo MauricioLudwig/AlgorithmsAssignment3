@@ -44,16 +44,20 @@ namespace Assignment3
                 switch (UI.DartClubMenu())
                 {
                     case ConsoleKey.D1: // Sort by eldest member
-                        dartClub.SortByEldest(); 
+                        dartClub.SortByEldest();
+                        Console.ReadKey();
                         break;
                     case ConsoleKey.D2: // Sort by last name
                         dartClub.SortByLastName();
+                        Console.ReadKey();
                         break;
-                    case ConsoleKey.D3: // List all member who have not paid their membership fees
+                    case ConsoleKey.D3: // List all members who have not paid their membership fees
                         dartClub.membershipNotPaid();
+                        Console.ReadKey();
                         break;
                     case ConsoleKey.D4: // Search by last name or social security number
                         dartClub.searchMember();
+                        Console.ReadKey();
                         break;
                     case ConsoleKey.D5: // Return to main menu
                         loop = false;

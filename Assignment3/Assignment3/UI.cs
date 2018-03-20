@@ -44,12 +44,16 @@ namespace Assignment3
 
         public static void PrintMembers(string header, List<Member> members)
         {
+            int index = 1;
             SmallMenuBar();
             Console.WriteLine($"\t{header}");
             SmallMenuBar();
+            Console.WriteLine("\n{0,-5}{1,-20} {2,-20} {3,-20} {4,-20}\n",
+                "#", "First Name", "Last Name", "Social Security", "Membership paid?");
             foreach (var member in members)
             {
-                Console.WriteLine($"{member.FirstName} {member.LastName} {member.SocialSecurityNr} {member.membershipFeePaid}");
+                Console.WriteLine("{0, -5}{1,-20} {2,-20} {3,-20} {4,-20}",
+                    index++, member.FirstName, member.LastName, member.SocialSecurityNr, member.membershipFeePaid == true ? "YES" : "NO");
             }
         }
 

@@ -1,42 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Reflection;
 
 namespace Assignment3.Algorithms
 {
     public static class QuickSorter
     {
-        public static T[] QuickSort<T>(T[] unsortedList, int left, int right)
+        public static T[] QuickSort<T, TProperty>(T[] unsortedList, int left, int right, Func<T, TProperty> selector)
         {
             if (left < right)
             {
-                int pivot = Partition(unsortedList, left, right);
-                QuickSort(unsortedList, left, pivot - 1);
-                QuickSort(unsortedList, pivot + 1, right);
+                int pivot = Partition(unsortedList, left, right, selector);
+                QuickSort(unsortedList, left, pivot - 1, selector);
+                QuickSort(unsortedList, pivot + 1, right, selector);
             }
 
             return unsortedList;
         }
 
-        private static int Partition<T>(T[] unsortedList, int left, int right)
+        private static int Partition<T, TProperty>(T[] unsortedList, int left, int right, Func<T, TProperty> selector)
         {
             T pivot = unsortedList[left];
 
             while (true)
             {
-                while (Comparer<T>.Default.Compare(unsortedList[left], pivot) < 0)
+                while (Comparer<TProperty>.Default.Compare(selector(unsortedList[left]), selector(pivot)) < 0)
                 {
                     left++;
                 }
 
-                while (Comparer<T>.Default.Compare(unsortedList[right], pivot) > 0)
+                while (Comparer<TProperty>.Default.Compare(selector(unsortedList[right]), selector(pivot)) > 0)
                 {
                     right--;
                 }
 
                 if (left < right)
                 {
-                    if (Comparer<T>.Default.Compare(unsortedList[left], unsortedList[right]) == 0)
+                    if (Comparer<TProperty>.Default.Compare(selector(unsortedList[left]), selector(unsortedList[right])) == 0)
                     {
                         return right;
                     }
