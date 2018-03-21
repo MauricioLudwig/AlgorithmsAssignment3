@@ -41,37 +41,37 @@ namespace Assignment3.G
         public void SortByEldest()
         {
             Console.Clear();
-            UI.PrintMembers("Unsorted", Members);
+            UI.PrintMembers("\t\t\t    Unsorted", Members);
             var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.SocialSecurityNr);
-            UI.PrintMembers("Sorted (Age)", sortedList.ToList());
+            UI.PrintMembers("\t\t\t    Sorted (Age)", sortedList.ToList());
         }
 
         public void SortByLastName()
         {
             Console.Clear();
-            UI.PrintMembers("Unsorted", Members);
+            UI.PrintMembers("\t\t\t    Unsorted", Members);
             var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.LastName);
-            UI.PrintMembers("Sorted (Last Name)", sortedList.ToList());
+            UI.PrintMembers("\t\t\t    Sorted (Last Name)", sortedList.ToList());
         }
 
         public void membershipNotPaid_LINQ()
         {
             Console.Clear();
-            UI.PrintMembers("Unsorted", Members);
-            UI.PrintMembers("Sorted (Members who have not paid their membership fee)", Members.Where(o => !o.membershipFeePaid).Select(o => o).ToList());
+            UI.PrintMembers("\t\t\t    Unsorted", Members);
+            UI.PrintMembers("\t\t\tSorted (Members who have not paid their membership fee)", Members.Where(o => !o.membershipFeePaid).Select(o => o).ToList());
         }
 
         public void membershipNotPaid_FOREACH()
         {
             Console.Clear();
-            UI.PrintMembers("Unsorted", Members);
+            UI.PrintMembers("\t\t\t    Unsorted", Members);
             var feeNotPaid = new List<Member>();
             foreach (var member in Members)
             {
                 if (!member.membershipFeePaid)
                     feeNotPaid.Add(member);
             }
-            UI.PrintMembers("Sorted (Members who have not paid their membership fee (USING FOREACH))", feeNotPaid);
+            UI.PrintMembers("Sorted (Members Who Have Not Paid Their Membership Fee (USING FOREACH))", feeNotPaid);
         }
 
         public void searchMember()
@@ -82,7 +82,7 @@ namespace Assignment3.G
             do
             {
 
-                Console.Write("Input: ");
+                Console.Write("\t\t\t\tInput: ");
                 input = Console.ReadLine().Trim();
 
             } while (String.IsNullOrEmpty(input));
@@ -93,13 +93,13 @@ namespace Assignment3.G
             {
                 var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.SocialSecurityNr);
                 var searchResult = LinearSearch(sortedList, o => o.SocialSecurityNr, result);
-                UI.PrintMembers("Search Result (Social Security Number)", searchResult);
+                UI.PrintMembers("\t\tSearch Result (Social Security Number)", searchResult);
             }
             else
             {
                 var sortedList = QuickSorter.QuickSort(Members.ToArray(), 0, Members.Count - 1, o => o.LastName);
                 var searchResult = LinearSearch(sortedList, o => o.LastName.ToLower(), input.ToLower());
-                UI.PrintMembers("Search Result (Last Name)", searchResult);
+                UI.PrintMembers("\t\t    Search Result (Last Name)", searchResult);
             }
         }
 

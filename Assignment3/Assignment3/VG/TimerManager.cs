@@ -17,19 +17,19 @@ namespace Assignment3.VG
             ResetStopWatch();
             var randomList = CreateRandomNumberList(listSize);
             stopWatch.Stop();
-            UI.PrintTimer($"Integer list generated (Size: {randomList.Length})", stopWatch.Elapsed);
+            UI.PrintTimer($"Integer List Generated (Size: {randomList.Length})", stopWatch.Elapsed);
 
             // Bubble Sort
             ResetStopWatch();
             BubbleSorter.BubbleSort(randomList);
             stopWatch.Stop();
-            UI.PrintTimer($"List sorted with Bubble Sort", stopWatch.Elapsed);
+            UI.PrintTimer($"List Sorted With Bubble Sort", stopWatch.Elapsed);
 
             // Merge Sort
             ResetStopWatch();
             MergeSorter.MergeSort(randomList);
             stopWatch.Stop();
-            UI.PrintTimer($"list sorted with Merge Sort", stopWatch.Elapsed);
+            UI.PrintTimer($"List Sorted With Merge Sort", stopWatch.Elapsed);
         }
 
         private void ResetStopWatch()
